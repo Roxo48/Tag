@@ -30,7 +30,7 @@ import org.bukkit.scheduler.BukkitRunnable;
             @Override
             public void run() {
 
-               Player player =  gamerManager.getTagger();
+               Player player =  gamerManager.getTagger().getTagger();
                 Location loc = player.getLocation();
                player.teleport(loc);
 

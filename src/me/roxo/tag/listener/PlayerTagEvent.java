@@ -31,12 +31,12 @@ public class PlayerTagEvent implements Listener {
             return;
         }
         e.setCancelled(true);
-        Tagger tagger = new Tagger(manger);
-        if(e.getDamager() == tagger.getTagger()){
-            tagger.setTagger((Player) e);
+
+        if(e.getDamager() ==  manger.getTagger().getTagger()){
+            manger.getTagger().setTagger((Player) e);
             ((Player) e).setDisplayName(ChatColor.RED + ((Player) e).getPlayer().getName());
             ((Player) e.getDamager()).setDisplayName(ChatColor.GREEN + ((Player) e.getDamager()).getPlayer().getName());
-            manger.getDoTask().Freeze();
+            //manger.getDoTask().Freeze();
         }
     }
 }

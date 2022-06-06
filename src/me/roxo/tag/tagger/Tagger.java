@@ -11,7 +11,6 @@ public class Tagger {
 
     public Tagger(Manger manger) {
 
-
         this.manger = manger;
     }
 
@@ -21,7 +20,7 @@ public class Tagger {
     }
 
     public void setTagger(Player player){
-        this.tagger = player;
+        tagger = player;
     }
 
 

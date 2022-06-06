@@ -19,11 +19,17 @@ public class Manger {
 
     private List<Player> playerArrayList = new ArrayList<Player>();
     private DoTask doTask;
-    private State state;
+
+
 
     private Tagger tagger;
+    private State state;
+
+
 
     public Manger(Tag plugin) {
+
+        this.tagger = new Tagger(this);
         this.plugin = plugin;
         this.doTask = new DoTask(this);
     }
@@ -38,32 +44,35 @@ public class Manger {
                 playerArrayList.addAll(Bukkit.getServer().getOnlinePlayers());
 
 
-
+                setState(State.STARTING);
                 break;
             case STARTING:
 
-                GameStartingTask gameStartingTask = new GameStartingTask(this);
-                gameStartingTask.run();
+                 GameStartingTask gameStartingTask =  new GameStartingTask(this);
+                gameStartingTask.runTaskTimer(plugin,0,20);
 
 
 
                 break;
             case ACTIVE:
+                System.out.println("x1");
                 double a = Math.random() * 5000;
-                Location loc = new Location(Bukkit.getServer().getWorld("world"),a,a,a);
+                Location loc = new Location(Bukkit.getServer().getWorld("world"),a,100,a);
 
                 World world = Bukkit.getWorld("world");
                 WorldBorder worldBorder = world.getWorldBorder();
                 worldBorder.setCenter(loc);
                 worldBorder.setSize(250);
-
+                System.out.println("x2");
                 for(Player player : playerArrayList){
                     player.teleport(loc);
                 }
-                tagger.setTagger(playerArrayList.stream().findAny().get());
-
+                System.out.println("x3");
+                tagger.setTagger(playerArrayList.stream().findFirst().get());
+                System.out.println("x4");
 
                 doTask.Timer();
+                System.out.println("x5");
                 break;
             case WON:
 
@@ -90,8 +99,8 @@ public class Manger {
     }
 
 
-    public Player getTagger(){
-        return tagger.getTagger();
+    public Tagger getTagger(){
+        return tagger;
     }
     public DoTask getDoTask(){
         return doTask;
