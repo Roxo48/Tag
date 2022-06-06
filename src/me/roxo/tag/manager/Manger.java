@@ -51,25 +51,19 @@ public class Manger {
                  GameStartingTask gameStartingTask =  new GameStartingTask(this);
                 gameStartingTask.runTaskTimer(plugin,0,20);
 
-
-
                 break;
             case ACTIVE:
-                System.out.println("x1");
                 double a = Math.random() * 5000;
                 Location loc = new Location(Bukkit.getServer().getWorld("world"),a,100,a);
 
                 World world = Bukkit.getWorld("world");
                 WorldBorder worldBorder = world.getWorldBorder();
                 worldBorder.setCenter(loc);
-                worldBorder.setSize(250);
-                System.out.println("x2");
+                worldBorder.setSize(150);
                 for(Player player : playerArrayList){
                     player.teleport(loc);
                 }
-                System.out.println("x3");
                 tagger.setTagger(playerArrayList.stream().findFirst().get());
-                System.out.println("x4");
 
                 doTask.Timer();
                 System.out.println("x5");
@@ -79,7 +73,7 @@ public class Manger {
                 World world1 = Bukkit.getWorld("world");
                 WorldBorder worldBorder1 = world1.getWorldBorder();
                 worldBorder1.setCenter(0,0);
-                worldBorder1.setSize(5000);
+                worldBorder1.setSize(1000);
 
                 break;
             case END:
