@@ -58,16 +58,13 @@ public class Manger {
 
                 break;
             case ACTIVE:
-                double a = Math.random() * 5000;
-                Location loc = new Location(Bukkit.getServer().getWorld("world"),a,100,a);
 
-                World world = Bukkit.getWorld("world");
-                WorldBorder worldBorder = world.getWorldBorder();
-                worldBorder.setCenter(loc);
-                worldBorder.setSize(100);
-                for(Player player1 : playerArrayList){
-                    player1.teleport(loc);
+                for(Player player1 : Bukkit.getServer().getOnlinePlayers()){
+                    player1.setInvulnerable(false);
+
                 }
+
+
 
 
                 doTask.Timer();
