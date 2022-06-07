@@ -21,6 +21,7 @@ public class Tagger {
 
     public void setTagger(Player player){
         tagger = player;
+
     }
 
 

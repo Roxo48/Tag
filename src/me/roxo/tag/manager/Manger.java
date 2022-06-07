@@ -47,7 +47,12 @@ public class Manger {
                 setState(State.STARTING);
                 break;
             case STARTING:
-
+                Bukkit.getServer().getOnlinePlayers().stream().iterator().next().getInventory().clear();
+                Bukkit.getServer().getOnlinePlayers().stream().iterator().next().setGlowing(false);
+                Player player = playerArrayList.stream().findFirst().get().getPlayer();
+                tagger.setTagger(player);
+                player.setGlowing(true);
+                Bukkit.getServer().broadcastMessage(getTagger().getTagger().getName());
                  GameStartingTask gameStartingTask =  new GameStartingTask(this);
                 gameStartingTask.runTaskTimer(plugin,0,20);
 
@@ -59,11 +64,11 @@ public class Manger {
                 World world = Bukkit.getWorld("world");
                 WorldBorder worldBorder = world.getWorldBorder();
                 worldBorder.setCenter(loc);
-                worldBorder.setSize(150);
-                for(Player player : playerArrayList){
-                    player.teleport(loc);
+                worldBorder.setSize(100);
+                for(Player player1 : playerArrayList){
+                    player1.teleport(loc);
                 }
-                tagger.setTagger(playerArrayList.stream().findFirst().get());
+
 
                 doTask.Timer();
                 System.out.println("x5");

@@ -15,7 +15,7 @@ public class Tag extends JavaPlugin {
         Manger manger = new Manger(this);
         getCommand("startgame").setExecutor(new StartCommand(manger));
         getServer().getPluginManager().registerEvents(new PlayerTagEvent(manger),this);
-        getServer().getPluginManager().registerEvents(new BreakBlock(manger),this);
+        //getServer().getPluginManager().registerEvents(new BreakBlock(manger),this);
 
 
     }

@@ -25,7 +25,7 @@ public class StartCommand implements CommandExecutor {
         }
 
         Player player = (Player) commandSender;
-        //if(!player.isOp()) return false;
+        if(!player.isOp()) return false;
         manger.setState(State.START);
         System.out.println("hi");
 

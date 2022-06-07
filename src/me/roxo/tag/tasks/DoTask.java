@@ -16,24 +16,29 @@ import org.bukkit.scheduler.BukkitRunnable;
     private boolean some = false;
     private int done;
 
+    private int a;
     public DoTask(Manger gamerManager){
         this.counter = 0;
         this.gamerManager = gamerManager;
         this.done =  0;
+
     }
 
 
-    public void Freeze(){
+    public void Freeze(Player player){
         long b = 20L * 7;
+         a = 0;
 
         new BukkitRunnable() {
             @Override
             public void run() {
 
-               Player player =  gamerManager.getTagger().getTagger();
                 Location loc = player.getLocation();
                player.teleport(loc);
-
+               a++;
+                if(a > 7){
+                    cancel();
+                }
 
             }
 

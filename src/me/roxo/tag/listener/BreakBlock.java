@@ -18,9 +18,7 @@ public class BreakBlock implements Listener {
 
     @EventHandler
     public void onBreak(PlayerInteractEvent e){
-        System.out.println("x1");
-        if (!(e instanceof Player)){return;}
-        System.out.println("x1");
+
         if(manger.getState() != State.ACTIVE){
             return;
         }
