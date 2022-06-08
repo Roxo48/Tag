@@ -9,17 +9,18 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Manger {
 
     private final Tag plugin;
 
-    private List<Player> playerArrayList = new ArrayList<Player>();
-    private DoTask doTask;
+    private final List<Player> playerArrayList = new ArrayList<>();
+    private final DoTask doTask;
 
 
 
-    private Tagger tagger;
+    private final Tagger tagger;
     private State state;
 
 
@@ -39,7 +40,7 @@ public class Manger {
 
             case START:
                 playerArrayList.addAll(Bukkit.getServer().getOnlinePlayers());
-
+                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
 
                 setState(State.STARTING);
                 break;
@@ -48,30 +49,29 @@ public class Manger {
                     player.setGlowing(false);
                     player.getInventory().clear();
                 }
+                int max,min;
+                min = 0;
+                max = playerArrayList.size()-1;
+                int b = (int)(Math.random()*(max-min+1)+min);
 
-
-                Player player = playerArrayList.stream().findFirst().get().getPlayer();
+                Player player = playerArrayList.get(b);
 
                 tagger.setTagger(player);
 
                 player.setGlowing(true);
 
                 Bukkit.getServer().broadcastMessage(getTagger().getTagger().getName());
+                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING, Boolean.FALSE);
 
-                 GameStartingTask gameStartingTask =  new GameStartingTask(this);
+                GameStartingTask gameStartingTask =  new GameStartingTask(this);
                 gameStartingTask.runTaskTimer(plugin,0,20);
 
                 break;
             case ACTIVE:
-                Bukkit.getServer().getWorld("world").setGameRule(GameRule.DO_MOB_SPAWNING,true);
-
+                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING,Boolean.FALSE);
                 for(Player player1 : playerArrayList){
                     player1.setInvulnerable(false);
                 }
-
-
-
-
                 doTask.Timer();
                 System.out.println("x5");
                 break;

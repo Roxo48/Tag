@@ -7,11 +7,15 @@ import me.roxo.tag.tasks.DoTask;
 import me.roxo.tag.tasks.Freeze;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Difficulty;
+import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import java.util.Objects;
 
 public class PlayerTagEvent implements Listener {
 
@@ -49,6 +53,9 @@ public class PlayerTagEvent implements Listener {
 
 
             manger.getTagger().setTagger(whoWasHit);
+            Objects.requireNonNull(Bukkit.getServer().getWorld("world")).createExplosion(whoWasHit.getLocation(), 2F,false);
+
+
 
             whoHit.setGlowing(false);
             whoWasHit.setGlowing(true);
