@@ -18,28 +18,42 @@ public class GameStartingTask extends BukkitRunnable {
     }
 
     private  int timer = 20;
+    double randX = Math.random() ;
+    double randZ = Math.random() ;
+    double rand = (Math.random() * 10);
 
-    double a = Math.random() * 5000;
-    Location loc = new Location(Bukkit.getServer().getWorld("world"),a,100,a);
+
+
 
 
     @Override
     public void run() {
 
         if (timer <= 0) {
+            for(Player players : gameManager.getPlayerArrayList()){
+                players.setInvulnerable(true);
+                // players.sendTitle("", timer+ "", 20,20,20);
+            }
             gameManager.setState(State.ACTIVE);
             cancel();
         }
 
         if (timer <= 5 || timer == 20) {
             for (Player players : gameManager.getPlayerArrayList()) {
-                players.sendTitle(ChatColor.LIGHT_PURPLE + "Game starting in " , timer + " second" + (timer == 1 ? "" : "s") + "...",3,3,3);
+                players.sendTitle(ChatColor.LIGHT_PURPLE + "Game starting in " , timer + " second" + (timer == 1 ? "" : "s") + "...",20,20,20);
             }
         }
-        if(timer <= 3){
-
-
+        if(timer == 5){
             for(Player players : gameManager.getPlayerArrayList()){
+                int X = (int) randX;
+                int Z = (int) randZ;
+                double random =  rand;
+                if(random > 6.5){
+                    X = (int)-X;
+                } else if(random < 3.5){
+                    Z = (int )-Z;
+                }
+                Location loc = new Location(Bukkit.getServer().getWorld("world"), X * 6000, 100 ,Z * 6000);
                 players.setInvulnerable(true);
                 players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1,1);
                 players.teleport(loc);
@@ -47,13 +61,9 @@ public class GameStartingTask extends BukkitRunnable {
                 WorldBorder worldBorder = world.getWorldBorder();
                 worldBorder.setCenter(loc);
                 worldBorder.setSize(100);
-                // players.sendTitle("", timer+ "", 20,20,20);
             }
         }
         timer--;
-
-
-
     }
 
 }
