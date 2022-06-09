@@ -25,26 +25,7 @@ import org.bukkit.scheduler.BukkitRunnable;
     }
 
 
-    public void Freeze(Player player){
-        long b = 20L * 7;
-         a = 0;
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-
-                Location loc = player.getLocation();
-               player.teleport(loc);
-               a++;
-                if(a > 7){
-                    cancel();
-                }
-
-            }
-
-
-        }.runTaskTimer(gamerManager.getPlugin(), 0L, b);
-    }
 
 
     public void Timer(){

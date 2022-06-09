@@ -5,6 +5,7 @@ import me.roxo.tag.tagger.Tagger;
 import me.roxo.tag.tasks.DoTask;
 import me.roxo.tag.tasks.GameStartingTask;
 import org.bukkit.*;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -60,7 +61,6 @@ public class Manger {
 
                 player.setGlowing(true);
 
-                Bukkit.getServer().broadcastMessage(getTagger().getTagger().getName());
                 Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING, Boolean.FALSE);
 
                 GameStartingTask gameStartingTask =  new GameStartingTask(this);
@@ -68,17 +68,25 @@ public class Manger {
 
                 break;
             case ACTIVE:
+
+                Biome biome = getTagger().getTagger().getWorld().getBiome(getTagger().getTagger().getLocation().getBlockX(),
+                        getTagger().getTagger().getLocation().getBlockY(),
+                        getTagger().getTagger().getLocation().getBlockZ());
+                if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN)){
+                    setState(State.STARTING);
+
+                }
+
                 Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING,Boolean.FALSE);
                 for(Player player1 : playerArrayList){
                     player1.setInvulnerable(false);
                 }
                 doTask.Timer();
-                System.out.println("x5");
                 break;
             case WON:
 
                 World world1 = Bukkit.getWorld("world");
-                WorldBorder worldBorder1 = world1.getWorldBorder();
+                WorldBorder worldBorder1 = Objects.requireNonNull(world1).getWorldBorder();
                 worldBorder1.setCenter(0,0);
                 worldBorder1.setSize(1000);
 
@@ -87,8 +95,6 @@ public class Manger {
 
 
                 break;
-
-
 
         }
 
@@ -103,9 +109,7 @@ public class Manger {
     public Tagger getTagger(){
         return tagger;
     }
-    public DoTask getDoTask(){
-        return doTask;
-    }
+
     public Tag getPlugin(){
         return plugin;
     }

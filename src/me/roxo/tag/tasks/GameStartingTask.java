@@ -44,16 +44,15 @@ public class GameStartingTask extends BukkitRunnable {
             }
         }
         if(timer == 5){
+            double X =  randX * 6000;
+            double Z =  randZ * 6000;
+            if(X > 2500){
+                X = -X;
+            }
+            if (Z < 2500) {Z = -Z;}
+            Location loc = new Location(Bukkit.getServer().getWorld("world"), X , 100 ,Z );
             for(Player players : gameManager.getPlayerArrayList()){
-                int X = (int) randX;
-                int Z = (int) randZ;
-                double random =  rand;
-                if(random > 6.5){
-                    X = (int)-X;
-                } else if(random < 3.5){
-                    Z = (int )-Z;
-                }
-                Location loc = new Location(Bukkit.getServer().getWorld("world"), X * 6000, 100 ,Z * 6000);
+
                 players.setInvulnerable(true);
                 players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1,1);
                 players.teleport(loc);

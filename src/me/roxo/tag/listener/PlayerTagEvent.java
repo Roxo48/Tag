@@ -21,6 +21,7 @@ public class PlayerTagEvent implements Listener {
 
     private final Manger manger;
 
+
     public PlayerTagEvent(Manger manger) {
         this.manger = manger;
     }
@@ -53,7 +54,7 @@ public class PlayerTagEvent implements Listener {
 
 
             manger.getTagger().setTagger(whoWasHit);
-            Objects.requireNonNull(Bukkit.getServer().getWorld("world")).createExplosion(whoWasHit.getLocation(), 2F,false);
+            Objects.requireNonNull(Bukkit.getServer().getWorld("world")).createExplosion(whoWasHit.getLocation(), 2F, false, false);
 
 
 

@@ -27,12 +27,13 @@ public class Freeze extends BukkitRunnable {
 
     @Override
     public void run() {
-
+        PotionEffect b = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 ,100, true,false,false );
+        player.addPotionEffect(b);
         if(tick == 5){
+            player.addPotionEffect(b);
             player.teleport(loc);
             player.sendTitle( ChatColor.RED + "UnFrozen", "",20,20,20);
             isFreezed = false;
-            PotionEffect b = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10 ,100, true,false,false );
             player.addPotionEffect(b);
             player.teleport(loc3);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP,1,1);
