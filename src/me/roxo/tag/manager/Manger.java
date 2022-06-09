@@ -1,6 +1,7 @@
 package me.roxo.tag.manager;
 
 import me.roxo.tag.Tag;
+import me.roxo.tag.gamemodemanager.*;
 import me.roxo.tag.tagger.Tagger;
 import me.roxo.tag.tasks.DoTask;
 import me.roxo.tag.tasks.GameStartingTask;
@@ -21,13 +22,34 @@ public class Manger {
 
 
 
+    private boolean set0;
+    private boolean set1;
+    private boolean set2;
+    private boolean set3;
+    private boolean set4;
+    private boolean set5;
+
+    private double X;
+    private double Z;
+
+
     private final Tagger tagger;
     private State state;
 
+    private NormalGameMode normalGameMode;
+    private FreezeTag freezeTag;
+    private Infection infection;
+    private PowerPowerupsGameMode powerPowerupsGameMode;
+    private TwoMinutesGameMode twoMinutesGameMode;
+    private boolean breakBlocks;
 
 
     public Manger(Tag plugin) {
-
+        this.normalGameMode = new NormalGameMode(this);
+        this.freezeTag = new FreezeTag(this);
+        this.infection = new Infection(this);
+        this.powerPowerupsGameMode = new PowerPowerupsGameMode(this);
+        this.twoMinutesGameMode = new TwoMinutesGameMode(this);
         this.tagger = new Tagger(this);
         this.plugin = plugin;
         this.doTask = new DoTask(this);
@@ -40,48 +62,58 @@ public class Manger {
         switch (state){
 
             case START:
-                playerArrayList.addAll(Bukkit.getServer().getOnlinePlayers());
-                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
 
-                setState(State.STARTING);
+                if(isSet0()){
+                    normalGameMode.start();
+                } else if (isSet1()){
+
+                } else if (isSet2()){
+
+                } else if (isSet3()){
+                    infection.start();
+
+                } else if (isSet4()){
+                    freezeTag.start();
+
+                } else if (isSet5()){
+
+                }
                 break;
             case STARTING:
-                for (Player player : playerArrayList){
-                    player.setGlowing(false);
-                    player.getInventory().clear();
+                if(isSet0()){
+                    normalGameMode.Starting();
+                } else if (isSet1()){
+
+                } else if (isSet2()){
+
+                } else if (isSet3()){
+                    infection.Starting();
+
+                } else if (isSet4()){
+                    freezeTag.Starting();
+
+                } else if (isSet5()){
+
                 }
-                int max,min;
-                min = 0;
-                max = playerArrayList.size()-1;
-                int b = (int)(Math.random()*(max-min+1)+min);
-
-                Player player = playerArrayList.get(b);
-
-                tagger.setTagger(player);
-
-                player.setGlowing(true);
-
-                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING, Boolean.FALSE);
-
-                GameStartingTask gameStartingTask =  new GameStartingTask(this);
-                gameStartingTask.runTaskTimer(plugin,0,20);
 
                 break;
             case ACTIVE:
+                if(isSet0()){
+                    normalGameMode.Active();
+                } else if (isSet1()){
 
-                Biome biome = getTagger().getTagger().getWorld().getBiome(getTagger().getTagger().getLocation().getBlockX(),
-                        getTagger().getTagger().getLocation().getBlockY(),
-                        getTagger().getTagger().getLocation().getBlockZ());
-                if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN)){
-                    setState(State.STARTING);
+                } else if (isSet2()){
+
+                } else if (isSet3()){
+                    infection.Active();
+
+                } else if (isSet4()){
+                    freezeTag.Active();
+
+                } else if (isSet5()){
 
                 }
 
-                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING,Boolean.FALSE);
-                for(Player player1 : playerArrayList){
-                    player1.setInvulnerable(false);
-                }
-                doTask.Timer();
                 break;
             case WON:
 
@@ -101,6 +133,7 @@ public class Manger {
 
     }
 
+
     public List<Player> getPlayerArrayList(){
         return playerArrayList;
     }
@@ -116,5 +149,77 @@ public class Manger {
 
     public State getState() {
         return state;
+    }
+
+    public boolean isSet0() {
+        return set0;
+    }
+
+    public void Set0(boolean set0) {
+        this.set0 = set0;
+    }
+
+    public boolean isSet1() {
+        return set1;
+    }
+
+    public void Set1(boolean set1) {
+        this.set1 = set1;
+    }
+
+    public boolean isSet2() {
+        return set2;
+    }
+
+    public void Set2(boolean set2) {
+        this.set2 = set2;
+    }
+
+    public boolean isSet3() {
+        return set3;
+    }
+
+    public void Set3(boolean set3) {
+        this.set3 = set3;
+    }
+
+    public boolean isSet4() {
+        return set4;
+    }
+
+    public void Set4(boolean set4) {
+        this.set4 = set4;
+    }
+
+    public boolean isSet5() {
+        return set5;
+    }
+
+    public void Set5(boolean set5) {
+        this.set5 = set5;
+    }
+
+    public double getX() {
+        return X;
+    }
+
+    public double getZ() {
+        return Z;
+    }
+
+    public void setX(double x) {
+        X = x;
+    }
+
+    public void setZ(double z) {
+        Z = z;
+    }
+
+    public void setBreakBlocks(boolean b) {
+        this.breakBlocks = b;
+    }
+
+    public boolean isBreakBlocks() {
+        return breakBlocks;
     }
 }

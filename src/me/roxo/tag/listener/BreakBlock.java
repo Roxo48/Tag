@@ -18,10 +18,12 @@ public class BreakBlock implements Listener {
 
     @EventHandler
     public void onBreak(PlayerInteractEvent e){
-
-        if(manger.getState() != State.ACTIVE){
+        System.out.println("x1");
+        System.out.println(manger.isBreakBlocks());
+        if(!manger.isBreakBlocks()){
             return;
         }
+
         System.out.println("x2");
         if (e.getAction() == Action.LEFT_CLICK_BLOCK){
             System.out.println("x3");

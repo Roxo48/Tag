@@ -18,9 +18,7 @@ public class GameStartingTask extends BukkitRunnable {
     }
 
     private  int timer = 20;
-    double randX = Math.random() ;
-    double randZ = Math.random() ;
-    double rand = (Math.random() * 10);
+
 
 
 
@@ -44,11 +42,7 @@ public class GameStartingTask extends BukkitRunnable {
             }
         }
         if(timer == 5){
-            double X =  randX * 6000;
-            double Z =  randZ * 6000;
-            if(X > 2500){X = -X;}
-            if (Z < 2500) {Z = -Z;}
-            Location loc = new Location(Bukkit.getServer().getWorld("world"), X , 100 ,Z );
+            Location loc = new Location(Bukkit.getServer().getWorld("world"), gameManager.getX() , 100 ,gameManager.getZ() );
             for(Player players : gameManager.getPlayerArrayList()){
 
                 players.setInvulnerable(true);
