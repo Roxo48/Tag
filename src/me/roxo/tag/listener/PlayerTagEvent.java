@@ -5,6 +5,7 @@ import me.roxo.tag.manager.State;
 import me.roxo.tag.tasks.Freeze;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,12 +27,12 @@ public class PlayerTagEvent implements Listener {
 
     @EventHandler
     public void onTag(EntityDamageByEntityEvent e) {
-
+        Bukkit.getServer().broadcastMessage("server before active in the player tag event");
         if (manger.getState() != State.ACTIVE) {
             return;
         }
 
-       // if (e.getEntity().getType() != EntityType.PLAYER) return;
+        if (e.getEntity().getType() != EntityType.PLAYER) return;
 
         Player whoWasHit;
         Player whoHit;
