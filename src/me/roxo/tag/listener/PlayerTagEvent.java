@@ -2,14 +2,9 @@ package me.roxo.tag.listener;
 
 import me.roxo.tag.manager.Manger;
 import me.roxo.tag.manager.State;
-import me.roxo.tag.tagger.Tagger;
-import me.roxo.tag.tasks.DoTask;
 import me.roxo.tag.tasks.Freeze;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

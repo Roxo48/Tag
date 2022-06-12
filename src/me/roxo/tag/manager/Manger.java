@@ -4,9 +4,7 @@ import me.roxo.tag.Tag;
 import me.roxo.tag.gamemodemanager.*;
 import me.roxo.tag.tagger.Tagger;
 import me.roxo.tag.tasks.DoTask;
-import me.roxo.tag.tasks.GameStartingTask;
 import org.bukkit.*;
-import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
