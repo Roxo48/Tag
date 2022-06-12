@@ -21,6 +21,7 @@ public class FreezeTag {
 
 
     public void start(){
+        Bukkit.getServer().broadcastMessage("server active6");
 
         manger.getPlayerArrayList().addAll(Bukkit.getServer().getOnlinePlayers());
         Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
@@ -33,6 +34,7 @@ public class FreezeTag {
 
     }
     public void Starting(){
+        Bukkit.getServer().broadcastMessage("server active5");
         for (Player player : manger.getPlayerArrayList()){
             player.getActivePotionEffects().clear();
             player.setGlowing(false);
@@ -56,11 +58,12 @@ public class FreezeTag {
 
     }
     public void Active(){
+        Bukkit.getServer().broadcastMessage("server active4");
         Biome biome = manger.getTagger().getTagger().getWorld().getBiome(manger.getTagger().getTagger().getLocation().getBlockX(),
                 manger.getTagger().getTagger().getLocation().getBlockY(),
                 manger.getTagger().getTagger().getLocation().getBlockZ());
         if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN)||  biome.equals(Biome.LUKEWARM_OCEAN)){
-            manger.setState(State.STARTING);
+            Bukkit.getServer().broadcastMessage("SEND A NEW GAME");
 
         }
 

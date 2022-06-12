@@ -114,7 +114,7 @@ public class StartCommand implements CommandExecutor {
             if (strings[3].equals("true")){
                 manger.setBreakBlocks(true);
             }
-
+            System.out.println("5");
             manger.Set4(true);
         }
         if (strings[0].equals("5")){

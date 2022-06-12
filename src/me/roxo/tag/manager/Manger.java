@@ -73,9 +73,11 @@ public class Manger {
                     infection.start();
 
                 } else if (isSet4()){
+                    Bukkit.getServer().broadcastMessage("server active");
                     freezeTag.start();
 
                 } else if (isSet5()){
+                    powerPowerupsGameMode.start();
 
                 }
                 break;
@@ -90,9 +92,11 @@ public class Manger {
                     infection.Starting();
 
                 } else if (isSet4()){
+                    Bukkit.getServer().broadcastMessage("server active2");
                     freezeTag.Starting();
 
                 } else if (isSet5()){
+                    powerPowerupsGameMode.Starting();
 
                 }
 
@@ -108,9 +112,11 @@ public class Manger {
                     infection.Active();
 
                 } else if (isSet4()){
+                    Bukkit.getServer().broadcastMessage("server activ3");
                     freezeTag.Active();
 
                 } else if (isSet5()){
+                    powerPowerupsGameMode.Active();
 
                 }
 

@@ -36,7 +36,7 @@ public class PlayerTagEvent implements Listener {
             return;
         }
 
-        if (e.getEntity().getType() != EntityType.PLAYER) return;
+       // if (e.getEntity().getType() != EntityType.PLAYER) return;
 
         Player whoWasHit;
         Player whoHit;
@@ -47,7 +47,9 @@ public class PlayerTagEvent implements Listener {
         if (a.isFreezed()) {
             return;
         }
+        Bukkit.getServer().broadcastMessage("server active10");
         if (manger.isSet0()) {
+            System.out.println("normal");
             if (whoHit.getName().equals(manger.getTagger().getTagger().getName())) {
 
                 Bukkit.getServer().broadcastMessage(ChatColor.RED + whoWasHit.getName() + " Is now Tagged ");
@@ -61,15 +63,15 @@ public class PlayerTagEvent implements Listener {
 
                 whoHit.setGlowing(false);
                 whoWasHit.setGlowing(true);
-
+                System.out.println(manger.isSet4() + "idk");
 
                 Bukkit.getServer().getOnlinePlayers().stream().iterator().next().setHealth(20);
 
-            } else if (manger.isSet1()) {
+            }  if (manger.isSet1()) {
 
-            } else if (manger.isSet2()) {
+            }  if (manger.isSet2()) {
 
-            } else if (manger.isSet3()) {
+            }  if (manger.isSet3()) {
                 boolean istagger = false;
                 for (Player player : manger.getTagger().getInfectionTaggers()) {
                     if (whoHit.getName().equals(player.getName())) {
@@ -92,12 +94,13 @@ public class PlayerTagEvent implements Listener {
 
                     Bukkit.getServer().getOnlinePlayers().stream().iterator().next().setHealth(20);
 
-                } else if (manger.isSet4()) {
+                }  if (manger.isSet4()) {
+                    Bukkit.getServer().broadcastMessage("server active7");
                     if (whoHit.getName().equals(manger.getTagger().getTagger().getName())) {
-
+                        Bukkit.getServer().broadcastMessage("server active8");
                         Bukkit.getServer().broadcastMessage(ChatColor.RED + whoWasHit.getName() + " Is now Frozen ");
 
-                        PotionEffect b = new PotionEffect(PotionEffectType.SLOW, 99999,255, true,false,false );
+                        PotionEffect b = new PotionEffect(PotionEffectType.SLOW, 99999,255, true,true,true );
                         whoWasHit.addPotionEffect(b);
 
                         manger.getTagger().setTagger(whoWasHit);
@@ -112,7 +115,7 @@ public class PlayerTagEvent implements Listener {
                         Bukkit.getServer().getOnlinePlayers().stream().iterator().next().setHealth(20);
 
 
-                    } else if (manger.isSet5()) {
+                    }  if (manger.isSet5()) {
 
 
 
