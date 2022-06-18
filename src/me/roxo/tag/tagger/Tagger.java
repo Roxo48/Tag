@@ -12,6 +12,8 @@ public class Tagger {
     private Player tagger;
     private ArrayList<Player> taggers = new ArrayList<>();
 
+    private ArrayList<Player> frozenTaggers = new ArrayList<>();
+
     public Tagger(Manger manger) {
 
         this.manger = manger;
@@ -34,6 +36,16 @@ public class Tagger {
     public void setInfectionTaggers(Player player){
         taggers.add(player);
 
+    }
+
+    public ArrayList<Player> getFozenPlayers(){return frozenTaggers; }
+
+    public void setFrzonPlayers(Player player){
+        frozenTaggers.add(player);
+    }
+    public void removeFrzenPlayer(Player player){
+
+     frozenTaggers.remove(player);
     }
 
 

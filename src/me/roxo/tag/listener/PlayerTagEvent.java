@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class PlayerTagEvent implements Listener {
@@ -34,9 +35,13 @@ public class PlayerTagEvent implements Listener {
         whoWasHit = (Player) e.getEntity();
         whoHit = (Player) e.getDamager();
         Freeze a = new Freeze(whoWasHit, whoWasHit.getLocation());
-        StayStill c = new StayStill(manger, whoWasHit);
+        StayStill c = new StayStill( whoWasHit, whoWasHit.getLocation());
+        ArrayList<StayStill> stayStills = new ArrayList<>();
         if(!manger.isSet4()){
-            c.cancel();
+            if(stayStills == null){return;}
+            for (StayStill stay: stayStills) {
+                stay.cancel();
+            }
         }
         Bukkit.getServer().broadcastMessage("server before active in the player tag event");
         if (manger.getState() != State.ACTIVE) {
@@ -111,17 +116,29 @@ public class PlayerTagEvent implements Listener {
                 PotionEffect b = new PotionEffect(PotionEffectType.SLOW, 99999, 255, true, false, false);
                 whoWasHit.addPotionEffect(b);
 
-                c.runTaskTimer(manger.getPlugin(), 0, 20);
+                manger.getTagger().setFrzonPlayers(whoWasHit);
 
-
-
-
-
+                stayStills.add(c);
 
                 Bukkit.getServer().getOnlinePlayers().stream().iterator().next().setHealth(20);
 
+            }
+            if (manger.getTagger().getFozenPlayers().contains(whoWasHit)
+                    && !(whoHit.getName().equals(manger.getTagger().getTagger().getName()))){
+
+                for (StayStill stayStill : stayStills){
+
+                    if(stayStill.getPlayer().getName().equals(whoWasHit.getName())){
+                        stayStill.setFreezed(true);
+                    }
+                }
 
             }
+
+
+
+
+
         }if (manger.isSet5()) {
 
 
@@ -131,5 +148,6 @@ public class PlayerTagEvent implements Listener {
 
 
                 }
+
             }
 
