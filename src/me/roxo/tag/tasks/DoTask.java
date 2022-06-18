@@ -4,6 +4,7 @@ import com.projectkorra.projectkorra.Manager;
 import me.roxo.tag.manager.Manger;
 import me.roxo.tag.manager.State;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -29,17 +30,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 
     public void Timer(){
-        long b = 20L * 60 * 20;
+        long b = 20L * 60 * 30;
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                System.out.println("this is a timer of the timer time timer timer");
-                done++;
-                if(done >= 20){
-                    gamerManager.setState(State.WON);
-                }
 
+                Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "You have been playing for " + done * 30 + " minutes");
+                done++;
             }
 
 

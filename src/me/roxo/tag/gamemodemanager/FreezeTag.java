@@ -3,9 +3,7 @@ package me.roxo.tag.gamemodemanager;
 import me.roxo.tag.manager.Manger;
 import me.roxo.tag.manager.State;
 import me.roxo.tag.tasks.GameStartingTask;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.GameRule;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
@@ -75,4 +73,13 @@ public class FreezeTag {
 
     }
 
+    public void Won() {
+        for(Player player : manger.getPlayerArrayList()){
+            player.playSound(player.getLocation(), Sound.WEATHER_RAIN_ABOVE, 2,2);
+            player.sendTitle(ChatColor.RED + "The Tagger has WON...", "", 20,20,20);
+        }
+        for(Player player : manger.getTagger().getFozenPlayers()){
+            manger.getTagger().getFozenPlayers().remove(player);
+        }
+    }
 }

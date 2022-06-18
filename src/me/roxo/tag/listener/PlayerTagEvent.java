@@ -91,9 +91,10 @@ public class PlayerTagEvent implements Listener {
                 }
             }
 
-            if (istagger) {
 
-                Bukkit.getServer().broadcastMessage(ChatColor.RED + whoWasHit.getName() + " Is now Infected Along with " + whoHit.getName());
+            if (istagger && !manger.getTagger().getInfectionTaggers().contains(whoWasHit)) {
+
+                Bukkit.getServer().broadcastMessage(ChatColor.DARK_RED + whoWasHit.getName() + " Is now Infected Along with " + whoHit.getName());
 
                 a.runTaskTimer(manger.getPlugin(), 0, 20);
 
@@ -106,12 +107,16 @@ public class PlayerTagEvent implements Listener {
 
 
                 Bukkit.getServer().getOnlinePlayers().stream().iterator().next().setHealth(20);
+                if(manger.getTagger().getInfectionTaggers().size() == Bukkit.getServer().getOnlinePlayers().size()){
+                    manger.setState(State.WON);
+
+                }
 
             }
         }if (manger.isSet4()) {
             if (whoHit.getName().equals(manger.getTagger().getTagger().getName())) {
 
-                Bukkit.getServer().broadcastMessage(ChatColor.RED + whoWasHit.getName() + " Is now Frozen ");
+                Bukkit.getServer().broadcastMessage(ChatColor.DARK_AQUA + whoWasHit.getName() + " Is now Frozen ");
 
                 PotionEffect b = new PotionEffect(PotionEffectType.SLOW, 99999, 255, true, false, false);
                 whoWasHit.addPotionEffect(b);
@@ -132,10 +137,10 @@ public class PlayerTagEvent implements Listener {
                         stayStill.setFreezed(true);
                     }
                 }
-
             }
-
-
+            if(manger.getTagger().getFozenPlayers().size() == Bukkit.getServer().getOnlinePlayers().size()){
+                manger.setState(State.WON);
+            }
 
 
 

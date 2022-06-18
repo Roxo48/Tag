@@ -121,10 +121,27 @@ public class Manger {
                     powerPowerupsGameMode.Active();
 
                 }
+                doTask.Timer();
 
                 break;
             case WON:
+                if(isSet0()){
 
+                } else if (isSet1()){
+
+                } else if (isSet2()){
+
+                } else if (isSet3()){
+                    infection.Won();
+
+                } else if (isSet4()){
+
+                    freezeTag.Won();
+
+                } else if (isSet5()){
+                    powerPowerupsGameMode.Active();
+
+                }
                 World world1 = Bukkit.getWorld("world");
                 WorldBorder worldBorder1 = Objects.requireNonNull(world1).getWorldBorder();
                 worldBorder1.setCenter(0,0);

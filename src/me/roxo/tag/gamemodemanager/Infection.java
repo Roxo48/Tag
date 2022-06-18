@@ -3,9 +3,7 @@ package me.roxo.tag.gamemodemanager;
 import me.roxo.tag.manager.Manger;
 import me.roxo.tag.manager.State;
 import me.roxo.tag.tasks.GameStartingTask;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.GameRule;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
@@ -70,6 +68,15 @@ public class Infection {
 
 
 
+    }
+    public void Won(){
+        for(Player player : manger.getPlayerArrayList()){
+            player.playSound(player.getLocation(), Sound.ENTITY_GHAST_DEATH, 2,2);
+            player.sendTitle(ChatColor.RED + "The Infected has WON...", "", 20,20,20);
+        }
+        for(Player player : manger.getTagger().getInfectionTaggers()){
+            manger.getTagger().getInfectionTaggers().remove(player);
+        }
     }
 
 
