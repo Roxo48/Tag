@@ -27,6 +27,7 @@ public class GameStartingTask extends BukkitRunnable {
     public void run() {
 
         if (timer <= 0) {
+
             for(Player players : gameManager.getPlayerArrayList()){
                 players.setInvulnerable(true);
                 // players.sendTitle("", timer+ "", 20,20,20);

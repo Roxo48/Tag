@@ -7,7 +7,6 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/../PluginsforPK/ProjectKorra-master/ProjectKorra-master/src" />
       <root url="file://$PROJECT_DIR$/../PluginsforPK" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/../PluginsforPK" recursive="false" />

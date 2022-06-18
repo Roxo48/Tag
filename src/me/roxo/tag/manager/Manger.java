@@ -6,6 +6,7 @@ import me.roxo.tag.tagger.Tagger;
 import me.roxo.tag.tasks.DoTask;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,7 @@ public class Manger {
                     infection.start();
 
                 } else if (isSet4()){
-                    Bukkit.getServer().broadcastMessage("server active");
+
                     freezeTag.start();
 
                 } else if (isSet5()){
@@ -80,6 +81,9 @@ public class Manger {
                 }
                 break;
             case STARTING:
+                for (Player player : getPlayerArrayList()){
+                    player.removePotionEffect((PotionEffectType.SLOW));
+                }
                 if(isSet0()){
                     normalGameMode.Starting();
                 } else if (isSet1()){
@@ -90,7 +94,7 @@ public class Manger {
                     infection.Starting();
 
                 } else if (isSet4()){
-                    Bukkit.getServer().broadcastMessage("server active2");
+
                     freezeTag.Starting();
 
                 } else if (isSet5()){
@@ -110,7 +114,7 @@ public class Manger {
                     infection.Active();
 
                 } else if (isSet4()){
-                    Bukkit.getServer().broadcastMessage("server activ3");
+
                     freezeTag.Active();
 
                 } else if (isSet5()){
