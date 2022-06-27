@@ -11,20 +11,22 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-public class PowerPowerupsGameMode {
+public class LaserTag {
 
     private final Manger manger;
 
-    public PowerPowerupsGameMode(Manger manger) {
+    public LaserTag(Manger manger) {
         this.manger = manger;
     }
+
 
     public void start(){
 
         manger.getPlayerArrayList().addAll(Bukkit.getServer().getOnlinePlayers());
         Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
         try {
-            if (manger.getTagger().getInfectionTaggers().size() > 1) {
+            if (manger.getTagger().getInfectionTaggers().size() > 1 || manger.getTagger().getSharks().size() > 1) {
+                manger.getTagger().getInfectionTaggers().clear();
                 manger.getTagger().getInfectionTaggers().clear();
             }
         }catch (Exception ignored){}
@@ -58,7 +60,7 @@ public class PowerPowerupsGameMode {
         Biome biome = manger.getTagger().getTagger().getWorld().getBiome(manger.getTagger().getTagger().getLocation().getBlockX(),
                 manger.getTagger().getTagger().getLocation().getBlockY(),
                 manger.getTagger().getTagger().getLocation().getBlockZ());
-        if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN) ||  biome.equals(Biome.LUKEWARM_OCEAN)){
+        if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN)||  biome.equals(Biome.LUKEWARM_OCEAN)){
             manger.setState(State.STARTING);
 
         }

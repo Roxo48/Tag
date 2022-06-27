@@ -38,8 +38,8 @@ public class Manger {
     private NormalGameMode normalGameMode;
     private FreezeTag freezeTag;
     private Infection infection;
-    private PowerPowerupsGameMode powerPowerupsGameMode;
-    private TwoMinutesGameMode twoMinutesGameMode;
+    private SharksandMinnows sharksandMinnows;
+    private LaserTag laserTag;
     private boolean breakBlocks;
 
 
@@ -47,8 +47,8 @@ public class Manger {
         this.normalGameMode = new NormalGameMode(this);
         this.freezeTag = new FreezeTag(this);
         this.infection = new Infection(this);
-        this.powerPowerupsGameMode = new PowerPowerupsGameMode(this);
-        this.twoMinutesGameMode = new TwoMinutesGameMode(this);
+        this.sharksandMinnows = new SharksandMinnows(this);
+        this.laserTag = new LaserTag(this);
         this.tagger = new Tagger(this);
         this.plugin = plugin;
         this.doTask = new DoTask(this);
@@ -65,8 +65,10 @@ public class Manger {
                 if(isSet0()){
                     normalGameMode.start();
                 } else if (isSet1()){
+                    laserTag.start();
 
                 } else if (isSet2()){
+                    sharksandMinnows.start();
 
                 } else if (isSet3()){
                     infection.start();
@@ -76,7 +78,7 @@ public class Manger {
                     freezeTag.start();
 
                 } else if (isSet5()){
-                    powerPowerupsGameMode.start();
+
 
                 }
                 break;
@@ -87,8 +89,10 @@ public class Manger {
                 if(isSet0()){
                     normalGameMode.Starting();
                 } else if (isSet1()){
+                    laserTag.Starting();
 
                 } else if (isSet2()){
+                    sharksandMinnows.Starting();
 
                 } else if (isSet3()){
                     infection.Starting();
@@ -98,7 +102,6 @@ public class Manger {
                     freezeTag.Starting();
 
                 } else if (isSet5()){
-                    powerPowerupsGameMode.Starting();
 
                 }
 
@@ -107,8 +110,11 @@ public class Manger {
                 if(isSet0()){
                     normalGameMode.Active();
                 } else if (isSet1()){
+                    laserTag.Active();
+
 
                 } else if (isSet2()){
+                    sharksandMinnows.Active();
 
                 } else if (isSet3()){
                     infection.Active();
@@ -118,7 +124,7 @@ public class Manger {
                     freezeTag.Active();
 
                 } else if (isSet5()){
-                    powerPowerupsGameMode.Active();
+
 
                 }
                 doTask.Timer();
@@ -128,6 +134,7 @@ public class Manger {
                 if(isSet0()){
 
                 } else if (isSet1()){
+
 
                 } else if (isSet2()){
 
@@ -139,7 +146,7 @@ public class Manger {
                     freezeTag.Won();
 
                 } else if (isSet5()){
-                    powerPowerupsGameMode.Active();
+
 
                 }
                 World world1 = Bukkit.getWorld("world");

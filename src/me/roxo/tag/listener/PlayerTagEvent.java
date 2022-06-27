@@ -81,7 +81,9 @@ public class PlayerTagEvent implements Listener {
 
             }  if (manger.isSet1()) {
 
+
             }  if (manger.isSet2()) {
+
 
             }  if (manger.isSet3()) {
             boolean istagger = false;

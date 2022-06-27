@@ -3,29 +3,27 @@ package me.roxo.tag.gamemodemanager;
 import me.roxo.tag.manager.Manger;
 import me.roxo.tag.manager.State;
 import me.roxo.tag.tasks.GameStartingTask;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.GameRule;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-public class TwoMinutesGameMode {
+public class SharksandMinnows {
 
     private final Manger manger;
 
-    public TwoMinutesGameMode(Manger manger) {
+    public SharksandMinnows(Manger manger) {
         this.manger = manger;
     }
-
 
     public void start(){
 
         manger.getPlayerArrayList().addAll(Bukkit.getServer().getOnlinePlayers());
         Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
         try {
-            if (manger.getTagger().getInfectionTaggers().size() > 1) {
+            if (manger.getTagger().getInfectionTaggers().size() > 1 || manger.getTagger().getSharks().size() > 1) {
+                manger.getTagger().getInfectionTaggers().clear();
                 manger.getTagger().getInfectionTaggers().clear();
             }
         }catch (Exception ignored){}
@@ -45,7 +43,7 @@ public class TwoMinutesGameMode {
 
         Player player = manger.getPlayerArrayList().get(b);
 
-        manger.getTagger().setTagger(player);
+        manger.getTagger().setSharks(player);
 
         player.setGlowing(true);
 
@@ -53,13 +51,19 @@ public class TwoMinutesGameMode {
 
         GameStartingTask gameStartingTask =  new GameStartingTask(manger);
         gameStartingTask.runTaskTimer(manger.getPlugin(),0,20);
-
+        double X =manger.getX();
+        double Z =manger.getZ();
+        Location border = new Location(player.getWorld(), X,0,Z);
+        World world1 = Bukkit.getWorld("world");
+        WorldBorder worldBorder1 = Objects.requireNonNull(world1).getWorldBorder();
+        worldBorder1.setCenter(border);
+        worldBorder1.setSize(100,25);
     }
     public void Active(){
         Biome biome = manger.getTagger().getTagger().getWorld().getBiome(manger.getTagger().getTagger().getLocation().getBlockX(),
                 manger.getTagger().getTagger().getLocation().getBlockY(),
                 manger.getTagger().getTagger().getLocation().getBlockZ());
-        if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN)||  biome.equals(Biome.LUKEWARM_OCEAN)){
+        if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN) ||  biome.equals(Biome.LUKEWARM_OCEAN)){
             manger.setState(State.STARTING);
 
         }

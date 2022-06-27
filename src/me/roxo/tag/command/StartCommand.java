@@ -43,8 +43,8 @@ public class StartCommand implements CommandExecutor {
         if(strings.length == 0){
             commandSender.sendMessage("Tag gamemodes: /startgame <gamemode> <X> <Z> <boolean of breakblocks>\n" +
                     "0 - normal\n" +
-                    "1 - 2 minutes (tagger is not revealed yet if possible) where you can't tag and everyone gets to manipulate the terrain to their advantage\n" +
-                    "2 - spawn at a custom location. This would be 2 coordinates (X, Z) after the 2.\n" +
+                    "1 - Laser tag\n" +
+                    "2 - Sharks and minnows.\n" +
                     "3 - Infection\n" +
                     "4 - Freeze Tag (1 tagger stays as tagger. tries to freeze everyone else)\n" +
                     "5 - random powerups spawn that give you a potion effect (haste, speed, jump boost, slowness, mining fatigue, glowing, etc.)\n" +

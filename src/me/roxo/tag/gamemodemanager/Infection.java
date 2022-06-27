@@ -23,7 +23,8 @@ public class Infection {
         manger.getPlayerArrayList().addAll(Bukkit.getServer().getOnlinePlayers());
         Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
         try {
-            if (manger.getTagger().getInfectionTaggers().size() > 1) {
+            if (manger.getTagger().getInfectionTaggers().size() > 1 || manger.getTagger().getSharks().size() > 1) {
+                manger.getTagger().getInfectionTaggers().clear();
                 manger.getTagger().getInfectionTaggers().clear();
             }
         }catch (Exception ignored){}

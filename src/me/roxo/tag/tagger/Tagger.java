@@ -14,6 +14,16 @@ public class Tagger {
 
     private ArrayList<Player> frozenTaggers = new ArrayList<>();
 
+    public ArrayList<Player> getSharks() {
+        return sharks;
+    }
+
+    public void setSharks(Player sharks) {
+        this.sharks.add(sharks);
+    }
+
+    private ArrayList<Player> sharks = new ArrayList<>();
+
     public Tagger(Manger manger) {
 
         this.manger = manger;
@@ -47,6 +57,7 @@ public class Tagger {
 
      frozenTaggers.remove(player);
     }
+
 
 
 }
