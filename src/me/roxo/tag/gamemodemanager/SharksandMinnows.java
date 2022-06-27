@@ -32,6 +32,7 @@ public class SharksandMinnows {
     }
     public void Starting(){
         for (Player player : manger.getPlayerArrayList()){
+            player.setInvulnerable(true);
             player.getActivePotionEffects().clear();
             player.setGlowing(false);
             player.getInventory().clear();
@@ -55,18 +56,30 @@ public class SharksandMinnows {
         double Z =manger.getZ();
         Location border = new Location(player.getWorld(), X,0,Z);
         World world1 = Bukkit.getWorld("world");
-        WorldBorder worldBorder1 = Objects.requireNonNull(world1).getWorldBorder();
-        worldBorder1.setCenter(border);
-        worldBorder1.setSize(100,25);
     }
     public void Active(){
-        Biome biome = manger.getTagger().getTagger().getWorld().getBiome(manger.getTagger().getTagger().getLocation().getBlockX(),
-                manger.getTagger().getTagger().getLocation().getBlockY(),
-                manger.getTagger().getTagger().getLocation().getBlockZ());
-        if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN) ||  biome.equals(Biome.LUKEWARM_OCEAN)){
-            manger.setState(State.STARTING);
-
+        double X =manger.getX();
+        double Z =manger.getZ();
+        Location border = new Location(manger.getTagger().getSharks().get(0).getWorld(), (X + 100),160,Z);
+        Location tele = new Location(manger.getTagger().getSharks().get(0).getWorld(), (X + 100),160,Z);
+        for(Player player : manger.getPlayerArrayList()){
+            if(!manger.getTagger().getSharks().contains(player)){
+               player.teleport(tele);
+            }
         }
+        for(Player shark : manger.getTagger().getSharks()){
+            shark.teleport(border);
+        }
+
+
+
+//        Biome biome = manger.getTagger().getTagger().getWorld().getBiome(manger.getTagger().getTagger().getLocation().getBlockX(),
+//                manger.getTagger().getTagger().getLocation().getBlockY(),
+//                manger.getTagger().getTagger().getLocation().getBlockZ());
+//        if( biome.equals(Biome.OCEAN) || biome.equals(Biome.DEEP_COLD_OCEAN) || biome.equals(Biome.COLD_OCEAN) ||  biome.equals(Biome.LUKEWARM_OCEAN)){
+//            manger.setState(State.STARTING);
+//
+//        }
 
         Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING,Boolean.FALSE);
         for(Player player1 : manger.getPlayerArrayList()){
@@ -74,6 +87,13 @@ public class SharksandMinnows {
         }
 
 
+
     }
 
+    public double getX100(){
+        return manger.getX()+100;
+    }
+    public double getX_100(){
+        return manger.getX()-100;
+    }
 }

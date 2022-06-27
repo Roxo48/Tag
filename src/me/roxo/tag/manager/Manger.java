@@ -38,7 +38,12 @@ public class Manger {
     private NormalGameMode normalGameMode;
     private FreezeTag freezeTag;
     private Infection infection;
-    private SharksandMinnows sharksandMinnows;
+
+    public SharksandMinnows getSharksandMinnows() {
+        return sharksandMinnows;
+    }
+
+    private  SharksandMinnows sharksandMinnows;
     private LaserTag laserTag;
     private boolean breakBlocks;
 

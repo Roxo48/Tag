@@ -6,6 +6,7 @@ import me.roxo.tag.tasks.Freeze;
 import me.roxo.tag.tasks.StayStill;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -83,7 +84,16 @@ public class PlayerTagEvent implements Listener {
 
 
             }  if (manger.isSet2()) {
-
+            ArrayList<Player> sharks = manger.getTagger().getSharks();
+            double X = manger.getX();
+            double Z = manger.getZ();
+            try {
+                manger.getTagger().getSafe().remove(whoWasHit);
+            }catch(Exception ignored){}
+            manger.getTagger().setSharks(whoWasHit);
+            Location location = manger.getTagger().getSharks().get(0).getLocation();
+            whoWasHit.teleport(location);
+            whoWasHit.setGlowing(true);
 
             }  if (manger.isSet3()) {
             boolean istagger = false;

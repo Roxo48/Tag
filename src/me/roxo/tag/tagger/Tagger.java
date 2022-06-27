@@ -24,6 +24,16 @@ public class Tagger {
 
     private ArrayList<Player> sharks = new ArrayList<>();
 
+    public ArrayList<Player> getSafe() {
+        return safe;
+    }
+
+    public void setSafe(Player safe) {
+        this.safe.add(safe);
+    }
+
+    private ArrayList<Player> safe = new ArrayList<>();
+
     public Tagger(Manger manger) {
 
         this.manger = manger;
