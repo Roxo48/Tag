@@ -42,7 +42,5 @@ public class PlayerMove implements Listener {
             player.setInvulnerable(false);
         }
         player.setInvulnerable(false);
-
-
     }
 }
