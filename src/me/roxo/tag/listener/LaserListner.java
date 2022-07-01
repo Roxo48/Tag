@@ -76,7 +76,7 @@ public class LaserListner implements Listener {
                     return;
                 }
                 player.spawnParticle(Particle.ASH, location, 1);
-                player.playSound(location, Sound.ENTITY_LLAMA_SPIT, .2f,2);
+                player.playSound(location, Sound.ENTITY_LLAMA_SPIT, 1f,2);
                 i += 0.2;
             }
             return;
