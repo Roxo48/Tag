@@ -6,8 +6,10 @@ import me.roxo.tag.tasks.GameStartingTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
@@ -47,6 +49,8 @@ public class LaserTag {
         Player player = manger.getPlayerArrayList().get(b);
 
         manger.getTagger().setTagger(player);
+        ItemStack itemStack = new ItemStack(Material.IRON_HORSE_ARMOR);
+        player.getInventory().addItem(itemStack);
 
         player.setGlowing(true);
 

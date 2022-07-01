@@ -44,7 +44,6 @@ public class PlayerTagEvent implements Listener {
                 stay.cancel();
             }
         }
-        Bukkit.getServer().broadcastMessage("server before active in the player tag event");
         if (manger.getState() != State.ACTIVE) {
             return;
         }
@@ -59,7 +58,6 @@ public class PlayerTagEvent implements Listener {
             return;
         }
 
-        Bukkit.getServer().broadcastMessage("server active10 " + manger.isSet4() + " " + manger.isSet0());
         if (manger.isSet0()) {
 
             if (whoHit.getName().equals(manger.getTagger().getTagger().getName())) {
