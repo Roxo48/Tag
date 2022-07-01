@@ -12,6 +12,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -76,7 +78,7 @@ public class LaserListner implements Listener {
                     return;
                 }
                 player.spawnParticle(Particle.ASH, location, 1);
-                player.playSound(location, Sound.ENTITY_LLAMA_SPIT, 1f,2);
+                player.playSound(location, Sound.ENTITY_LLAMA_SPIT, .2f,2);
                 i += 0.2;
             }
             return;
@@ -109,7 +111,9 @@ public class LaserListner implements Listener {
         player.getInventory().clear();
         ItemStack itemStack = new ItemStack(Material.IRON_HORSE_ARMOR);
         player2.getInventory().addItem(itemStack);
+        PotionEffect b = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 30 ,100, true,false,false );
+            player2.addPotionEffect(b);
         freeze = new Freeze(player2, player2.getLocation());
-        freeze.run();
+        freeze.runTaskTimer(manger.getPlugin(),0,20);
     }
 }
