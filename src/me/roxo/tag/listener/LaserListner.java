@@ -2,7 +2,6 @@ package me.roxo.tag.listener;
 
 import me.roxo.tag.manager.Manger;
 import me.roxo.tag.manager.State;
-import me.roxo.tag.tasks.BlasterTimer;
 import me.roxo.tag.tasks.Freeze;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -12,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -28,7 +26,6 @@ public class LaserListner implements Listener {
     private boolean bool;
     private int agh;
     private Player player2;
-    private BlasterTimer blasterTimer;
     private Freeze freeze;
     public LaserListner(Manger manger) {
         this.manger = manger;
@@ -44,7 +41,6 @@ public class LaserListner implements Listener {
         }catch (Exception ignored){}
         if (itemsName == null)return;
         Player player = e.getPlayer();
-        this.blasterTimer = new BlasterTimer(player);
         if(itemsName != Material.IRON_HORSE_ARMOR){ player.setWalkSpeed(0.2F);} else {
             player.getInventory().getItemInMainHand();
         }
