@@ -1,6 +1,8 @@
 package me.roxo.tag.listener;
 
 import me.roxo.tag.manager.Manger;
+import me.roxo.tag.manager.State;
+import me.roxo.tag.tasks.BlasterTimer;
 import me.roxo.tag.tasks.Freeze;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -22,11 +24,11 @@ import java.util.Objects;
 
 public class LaserListner implements Listener {
     Manger manger;
-
     private int count;
     private boolean bool;
     private int agh;
     private Player player2;
+    private BlasterTimer blasterTimer;
     private Freeze freeze;
     public LaserListner(Manger manger) {
         this.manger = manger;
@@ -35,16 +37,20 @@ public class LaserListner implements Listener {
     @EventHandler
     public void gravitationalUraniumBlaster(@NotNull PlayerInteractEvent e){
         if(!manger.isSet1()){return;}
+        if(manger.getState() != State.ACTIVE){return;}
         Material itemsName = null;
         try{
             itemsName = e.getPlayer().getInventory().getItemInMainHand().getType();
         }catch (Exception ignored){}
         if (itemsName == null)return;
         Player player = e.getPlayer();
+        this.blasterTimer = new BlasterTimer(player);
         if(itemsName != Material.IRON_HORSE_ARMOR){ player.setWalkSpeed(0.2F);} else {
             player.getInventory().getItemInMainHand();
         }
-        if (e.getAction().equals(Action.LEFT_CLICK_AIR) && itemsName == Material.IRON_HORSE_ARMOR && player.getName().equals(manger.getTagger().getTagger().getName())) {
+        if (e.getAction().equals(Action.LEFT_CLICK_AIR) && e.getPlayer().getInventory().getItemInMainHand().getType() == Material.IRON_HORSE_ARMOR && player.getName().equals(manger.getTagger().getTagger().getName())) {
+           if (player.hasCooldown(Material.IRON_HORSE_ARMOR)){return;}
+            player.setCooldown(Material.IRON_HORSE_ARMOR, 30);
             Location loc = player.getEyeLocation();
             Location location = loc.clone();
             Vector vector = loc.getDirection();
@@ -52,7 +58,7 @@ public class LaserListner implements Listener {
             double i = 0;
             while(i <= 30){
                 location.add(vec);
-                Collection<Entity> entities = Objects.requireNonNull(Bukkit.getServer().getWorld(player.getWorld().getName())).getNearbyEntities(location,1,1,1);
+                Collection<Entity> entities = Objects.requireNonNull(Bukkit.getServer().getWorld(player.getWorld().getName())).getNearbyEntities(location,.4,.4,.4);
                 if(entities != null){
                     for(Entity entity : entities){
                         if(entity.getName().equals(e.getPlayer().getName())){continue;}
@@ -67,8 +73,6 @@ public class LaserListner implements Listener {
                                 bool = true;
                                 dothis(player);
                                 return;
-                               // hit.spawnParticle(Particle.REDSTONE, hit.getEyeLocation(), 5);
-                                
                             }
                         }
                     }
@@ -81,7 +85,6 @@ public class LaserListner implements Listener {
                 player.playSound(location, Sound.ENTITY_LLAMA_SPIT, .2f,2);
                 i += 0.2;
             }
-            return;
         }
         if(e.getAction().equals(Action.RIGHT_CLICK_AIR) && player.getInventory().getItemInMainHand().getType() == Material.IRON_HORSE_ARMOR){
             if(count % 2 == 0){
@@ -91,18 +94,6 @@ public class LaserListner implements Listener {
             }
         count++;
         }
-//        if(bool) {
-//            player.setWalkSpeed(.2F);
-//            player.setGlowing(false);
-//            player2.setGlowing(true);
-//            player.getInventory().clear();
-//            ItemStack itemStack = new ItemStack(Material.IRON_HORSE_ARMOR);
-//            player2.getInventory().addItem(itemStack);
-//            freeze = new Freeze(player, player.getLocation());
-//            freeze.run();
-//            //Undoes the zoom effect.
-//            bool = false;
-//        }
     }
     private void dothis(Player player){
         player.setWalkSpeed(.2F);
@@ -111,8 +102,9 @@ public class LaserListner implements Listener {
         player.getInventory().clear();
         ItemStack itemStack = new ItemStack(Material.IRON_HORSE_ARMOR);
         player2.getInventory().addItem(itemStack);
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2,2);
         PotionEffect b = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 30 ,100, true,false,false );
-            player2.addPotionEffect(b);
+        player2.addPotionEffect(b);
         freeze = new Freeze(player2, player2.getLocation());
         freeze.runTaskTimer(manger.getPlugin(),0,20);
     }
