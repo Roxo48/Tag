@@ -31,6 +31,7 @@ public class StartCommand implements CommandExecutor {
         manger.Set3(false);
         manger.Set4(false);
         manger.Set5(false);
+        manger.setPlayerLocation(commandSender.getServer().getPlayer(commandSender.getName()).getLocation());
         if (!(commandSender instanceof Player)){
             return false;
         }

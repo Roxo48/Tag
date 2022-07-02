@@ -22,7 +22,7 @@ public class FreezeTag {
 
 
         manger.getPlayerArrayList().addAll(Bukkit.getServer().getOnlinePlayers());
-        Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setDifficulty(Difficulty.PEACEFUL);
+        Objects.requireNonNull(Bukkit.getServer().getWorld(manger.getTagger().getTagger().getLocation().getWorld().getName())).setDifficulty(Difficulty.PEACEFUL);
         try {
             if (manger.getTagger().getInfectionTaggers().size() > 1 || manger.getTagger().getSharks().size() > 1) {
                 manger.getTagger().getInfectionTaggers().clear();
@@ -50,7 +50,7 @@ public class FreezeTag {
 
         player.setGlowing(true);
 
-        Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING, Boolean.FALSE);
+        Objects.requireNonNull(Bukkit.getServer().getWorld(player.getLocation().getWorld().getName())).setGameRule(GameRule.DO_MOB_SPAWNING, Boolean.FALSE);
 
         GameStartingTask gameStartingTask =  new GameStartingTask(manger);
         gameStartingTask.runTaskTimer(manger.getPlugin(),0,20);
@@ -66,7 +66,7 @@ public class FreezeTag {
 
         }
 
-        Objects.requireNonNull(Bukkit.getServer().getWorld("world")).setGameRule(GameRule.DO_MOB_SPAWNING,Boolean.FALSE);
+        Objects.requireNonNull(Bukkit.getServer().getWorld(manger.getTagger().getTagger().getLocation().getWorld().getName())).setGameRule(GameRule.DO_MOB_SPAWNING,Boolean.FALSE);
         for(Player player1 : manger.getPlayerArrayList()){
             player1.setInvulnerable(false);
         }

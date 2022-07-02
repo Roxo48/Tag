@@ -68,7 +68,7 @@ public class PlayerTagEvent implements Listener {
 
 
                 manger.getTagger().setTagger(whoWasHit);
-                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).createExplosion(whoWasHit.getLocation(), 2F, false, false);
+                Objects.requireNonNull(Bukkit.getServer().getWorld(manger.getTagger().getTagger().getLocation().getWorld().getName())).createExplosion(whoWasHit.getLocation(), 2F, false, false);
 
 
                 whoHit.setGlowing(false);
@@ -110,7 +110,7 @@ public class PlayerTagEvent implements Listener {
 
 
                 manger.getTagger().setInfectionTaggers(whoWasHit);
-                Objects.requireNonNull(Bukkit.getServer().getWorld("world")).createExplosion(whoWasHit.getLocation(), 2F, false, false);
+                Objects.requireNonNull(Bukkit.getServer().getWorld(manger.getTagger().getTagger().getLocation().getWorld().getName())).createExplosion(whoWasHit.getLocation(), 2F, false, false);
 
 
                 whoWasHit.setGlowing(true);

@@ -47,6 +47,8 @@ public class Manger {
     private LaserTag laserTag;
     private boolean breakBlocks;
 
+    private World world;
+    private Location playerLocation;
 
     public Manger(Tag plugin) {
         this.normalGameMode = new NormalGameMode(this);
@@ -57,6 +59,7 @@ public class Manger {
         this.tagger = new Tagger(this);
         this.plugin = plugin;
         this.doTask = new DoTask(this);
+
     }
 
 
@@ -154,8 +157,8 @@ public class Manger {
 
 
                 }
-                World world1 = Bukkit.getWorld("world");
-                WorldBorder worldBorder1 = Objects.requireNonNull(world1).getWorldBorder();
+                 world = Bukkit.getWorld(getTagger().getTagger().getLocation().getWorld().getName());
+                WorldBorder worldBorder1 = Objects.requireNonNull(world).getWorldBorder();
                 worldBorder1.setCenter(0,0);
                 worldBorder1.setSize(1000);
 
@@ -258,5 +261,21 @@ public class Manger {
 
     public boolean isBreakBlocks() {
         return breakBlocks;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public Location getPlayerLocation() {
+        return playerLocation;
+    }
+
+    public void setPlayerLocation(Location playerLocation) {
+        this.playerLocation = playerLocation;
     }
 }

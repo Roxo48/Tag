@@ -42,13 +42,13 @@ public class GameStartingTask extends BukkitRunnable {
             }
         }
         if(timer == 5){
-            Location loc = new Location(Bukkit.getServer().getWorld("world"), gameManager.getX() , 100 ,gameManager.getZ() );
+            Location loc = new Location(Bukkit.getServer().getWorld(gameManager.getTagger().getTagger().getLocation().getWorld().getName()), gameManager.getX() , 100 ,gameManager.getZ() );
             for(Player players : gameManager.getPlayerArrayList()){
 
                 players.setInvulnerable(true);
                 players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_BANJO, 1,1);
                 players.teleport(loc);
-                World world = Bukkit.getWorld("world");
+                World world = Bukkit.getWorld(gameManager.getTagger().getTagger().getLocation().getWorld().getName());
                 WorldBorder worldBorder = world.getWorldBorder();
                 worldBorder.setCenter(loc);
                 worldBorder.setSize(100);

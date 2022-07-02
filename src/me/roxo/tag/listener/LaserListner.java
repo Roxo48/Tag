@@ -52,7 +52,7 @@ public class LaserListner implements Listener {
             Vector vector = loc.getDirection();
             Vector vec = vector.normalize().multiply(0.2);
             double i = 0;
-            while(i <= 30){
+            while(i <= 20){
                 location.add(vec);
                 Collection<Entity> entities = Objects.requireNonNull(Bukkit.getServer().getWorld(player.getWorld().getName())).getNearbyEntities(location,.4,.4,.4);
                 if(entities != null){
